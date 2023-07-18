@@ -3,17 +3,22 @@ package com.example.listepain;
 import com.example.listepain.models.Bread;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
+    // Criar a lista de pães
     List<Bread> breadList = createBreadList();
 
+    // Exibir a tabela de pães
     displayBreadTable(breadList);
   }
 
+  // Aqui cria a lista de pães com suas quantidades ideais
   private static List<Bread> createBreadList() {
     List<Bread> breadList = new ArrayList<>();
 
+    // Aqui é adicionado cada tipo de pao e suas quantidades ideais
     breadList.add(new Bread("Pain clair", 10));
     breadList.add(new Bread("Pagnol clair", 3));
     breadList.add(new Bread("Pagnol rustique", 3));
@@ -34,16 +39,23 @@ public class Main {
     return breadList;
   }
 
+  // Método para exibir a tabela de pães
   private static void displayBreadTable(List<Bread> breadList) {
     System.out.println("Paes\t\tQtd ideal\tQtd no Rayon\tQuanto assar");
+
+    Scanner scanner = new Scanner(System.in);
     for (Bread bread : breadList) {
       System.out.print(bread.getName() + "\t\t" + bread.getIdealQuantity() + "\t\t");
+
       // Exibir a quantidade no Rayon (vitrine)
-      System.out.print("\t\t"); // Adicione aqui o campo para a quantidade no Rayon
+      System.out.print("\t\t");
+      int currentQuantity = scanner.nextInt(); // Lê a quantidade no Rayon informada pelo usuário
+
       // Calcular e exibir a quantidade a ser assada
-      int currentQuantity = 0; // Substitua 0 pelo valor do campo de entrada "Qtd no Rayon"
       int quantityToBake = Math.max(0, bread.getIdealQuantity() - currentQuantity);
       System.out.println(quantityToBake);
     }
+
+    scanner.close();
   }
 }
